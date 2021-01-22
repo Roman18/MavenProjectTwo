@@ -7,5 +7,6 @@ public interface ContactService {
     void remove(String name);
     void add(Contact c);
     void searchByName(String name);
-    void searchByPhone(String number);
+    void searchByContact(String contact);
+
 }

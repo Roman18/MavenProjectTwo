@@ -2,16 +2,14 @@ package com.company.NewContactBook;
 
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.util.Scanner;
 
 public class ShowAllContactsMenuAction implements MenuAction {
     private Scanner scanner;
-    private ContactService cs;
+    private ContactService[] cs;
 
-    public ShowAllContactsMenuAction(Scanner scanner, ContactService cs) {
+    public ShowAllContactsMenuAction(Scanner scanner, ContactService[] cs) {
         this.scanner = scanner;
         this.cs = cs;
     }
@@ -19,8 +17,9 @@ public class ShowAllContactsMenuAction implements MenuAction {
     @Override
     public void doAction() {
         while (true) {
-            System.out.println("Contacts from list in memory:");
-            System.out.println(cs.getAll());
+            for (int i = 0; i <cs.length ; i++) {
+                System.out.println(cs[i].getAll());
+            }
             if (!closeAfter()){
                 break;
             }

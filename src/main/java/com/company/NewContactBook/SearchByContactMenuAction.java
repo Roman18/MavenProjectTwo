@@ -2,10 +2,10 @@ package com.company.NewContactBook;
 
 import java.util.Scanner;
 
-public class SearchByPhoneMenuAction implements MenuAction {
+public class SearchByContactMenuAction implements MenuAction {
     private Scanner scanner;
-    private ContactService cs;
-    public SearchByPhoneMenuAction(Scanner sc, ContactService cs) {
+    private ContactService []cs;
+    public SearchByContactMenuAction(Scanner sc, ContactService[] cs) {
         this.scanner = sc;
         this.cs=cs;
 
@@ -13,9 +13,11 @@ public class SearchByPhoneMenuAction implements MenuAction {
     @Override
     public void doAction() {
         while (true) {
-            System.out.println("Please, enter part of number");
-            String name=validNumber();
-            cs.searchByPhone(name);
+            System.out.println("Please, enter part of contact");
+            String contact=validNumber();
+            for (int i = 0; i <cs.length ; i++) {
+                cs[i].searchByContact(contact);
+            }
             if (!closeAfter()) {
                 break;
             }
@@ -24,17 +26,17 @@ public class SearchByPhoneMenuAction implements MenuAction {
 
     private String validNumber(){
         while (true){
-            String number=scanner.nextLine();
-            if (number.matches("(\\+380)?\\d{0,9}")&&!number.equals(" ")){
-                return number;
+            String contact=scanner.nextLine();
+            if (!contact.equals(" ")){
+                return contact;
             }else {
-                System.out.println("Invalid phone number\nTry again...");
+                System.out.println("Invalid contact\nTry again...");
             }
         }
     }
     @Override
     public String getName() {
-        return "Search by phone number";
+        return "Search by contact";
     }
 
     @Override

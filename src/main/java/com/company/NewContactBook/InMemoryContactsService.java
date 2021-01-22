@@ -14,20 +14,21 @@ public class InMemoryContactsService implements ContactService {
 
     @Override
     public List getAll() {
+        System.out.println("=====Result from memory=====");
         return list;
     }
 
     @Override
     public void remove(String name) {
         int oldSize = list.size();
-        for (int i = 0; i <list.size() ; i++) {
-            if (name.equals(list.get(i).getName())){
+        for (int i = 0; i < list.size(); i++) {
+            if (name.equals(list.get(i).getName())) {
                 list.remove(i);
                 break;
             }
         }
         int newSize = list.size();
-        if (oldSize-newSize != 1) {
+        if (oldSize - newSize != 1) {
             System.out.println("Name is not exist in memory");
         } else {
             System.out.println("The contact has been removed from list in memory!");
@@ -41,17 +42,20 @@ public class InMemoryContactsService implements ContactService {
 
     @Override
     public void searchByName(String name) {
+        System.out.println("=====Result from memory=====");
         list.stream().
-                filter(s->s.getName().startsWith(name)).
+                filter(s -> s.getName().startsWith(name)).
                 forEach(System.out::println);
 
     }
 
     @Override
-    public void searchByPhone(String phone) {
+    public void searchByContact(String contact) {
+        System.out.println("=====Result from memory=====");
         list.stream().
-                filter(s->s.getPhone().contains(phone)).
+                filter(s -> s.getContact().contains(contact)).
                 forEach(System.out::println);
     }
+
 
 }

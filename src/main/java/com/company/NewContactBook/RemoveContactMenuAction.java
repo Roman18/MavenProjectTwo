@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class RemoveContactMenuAction implements MenuAction {
 
     private Scanner scanner;
-    private ContactService cs;
+    private ContactService[] cs;
 
-    public RemoveContactMenuAction(Scanner sc, ContactService cs) {
+    public RemoveContactMenuAction(Scanner sc, ContactService[] cs) {
         this.scanner = sc;
         this.cs = cs;
 
@@ -19,7 +19,9 @@ public class RemoveContactMenuAction implements MenuAction {
         while (true) {
             System.out.println("Please, enter name:");
             String name = scanner.next();
-            cs.remove(name);
+            for (int i = 0; i < cs.length; i++) {
+                cs[i].remove(name);
+            }
             if (!closeAfter()) {
                 break;
             }

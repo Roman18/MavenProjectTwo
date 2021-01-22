@@ -13,37 +13,37 @@ public class Menu {
         this.sc = sc;
     }
 
-    public void addAction(MenuAction ma){
-        actions = Arrays.copyOf(actions,actions.length+1);
-        actions[actions.length-1]=ma;
+    public void addAction(MenuAction ma) {
+        actions = Arrays.copyOf(actions, actions.length + 1);
+        actions[actions.length - 1] = ma;
     }
 
-    public void  run(){
-        while (true){
+    public void run() {
+        while (true) {
             showMenu();
-            int choose=sc.nextInt();
+            int choose = sc.nextInt();
             sc.nextLine();
-            if (choose==6){
+            if (choose == 6) {
                 break;
             }
-            if (validIndex(choose)){
-                actions[choose-1].doAction();
-            }else {
+            if (validIndex(choose)) {
+                actions[choose - 1].doAction();
+            } else {
                 System.out.println("Invalid index...");
             }
         }
     }
 
     private void showMenu() {
-        for (int i = 0; i <actions.length ; i++) {
-            System.out.println(i+1+" - "+actions[i].getName());
+        for (int i = 0; i < actions.length; i++) {
+            System.out.println(i + 1 + " - " + actions[i].getName());
         }
         System.out.println("6 - Exit");
 
     }
 
-    private boolean validIndex(int index){
-        if (index<=0||index>actions.length){
+    private boolean validIndex(int index) {
+        if (index <= 0 || index > actions.length) {
             return false;
         }
         return true;

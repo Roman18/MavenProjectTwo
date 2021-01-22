@@ -2,22 +2,24 @@ package com.company.NewContactBook;
 
 public class Contact {
     private String name;
-    private String phone;
+    private EnumContacts enumContacts;
+    private String contact;
 
-    public Contact(String name, String phone){
+    public Contact(String name, String contact,EnumContacts enumContacts){
+        this.enumContacts=enumContacts;
         this.name=name;
-        this.phone=phone;
+        this.contact=contact;
     }
 
     public String getName(){
         return this.name;
     }
-    public String getPhone(){
-        return this.phone;
+    public String getContact(){
+        return this.contact;
     }
 
     @Override
     public String toString() {
-        return name+" "+phone;
+        return name+"["+enumContacts+":"+contact+"]";
     }
 }

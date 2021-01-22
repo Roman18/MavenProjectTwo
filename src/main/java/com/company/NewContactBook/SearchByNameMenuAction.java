@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class SearchByNameMenuAction implements MenuAction {
     private Scanner scanner;
-    private ContactService cs;
+    private ContactService[] cs;
 
-    public SearchByNameMenuAction(Scanner sc, ContactService cs) {
+    public SearchByNameMenuAction(Scanner sc, ContactService[] cs) {
         this.scanner = sc;
         this.cs = cs;
 
@@ -17,7 +17,10 @@ public class SearchByNameMenuAction implements MenuAction {
         while (true) {
             System.out.println("Please, enter name");
             String name=scanner.nextLine();
-            cs.searchByName(name);
+            for (int i = 0; i <cs.length ; i++) {
+
+                cs[i].searchByName(name);
+            }
             if (!closeAfter()) {
                 break;
             }
