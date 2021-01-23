@@ -3,10 +3,10 @@ package com.company.NewContactBook;
 import java.util.List;
 
 public interface ContactService {
-    List getAll();
+    List<Contact> getAll();
     void remove(String name);
     void add(Contact c);
-    void searchByName(String name);
-    void searchByContact(String contact);
+    List<Contact> searchByName(String name);
+    List<Contact> searchByContact(String contact);
 
 }

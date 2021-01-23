@@ -3,6 +3,8 @@ package com.company.NewContactBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InMemoryContactsService implements ContactService {
     private List<Contact> list;
@@ -13,7 +15,7 @@ public class InMemoryContactsService implements ContactService {
 
 
     @Override
-    public List getAll() {
+    public List<Contact> getAll() {
         System.out.println("=====Result from memory=====");
         return list;
     }
@@ -41,20 +43,20 @@ public class InMemoryContactsService implements ContactService {
     }
 
     @Override
-    public void searchByName(String name) {
+    public List<Contact> searchByName(String name) {
         System.out.println("=====Result from memory=====");
-        list.stream().
-                filter(s -> s.getName().startsWith(name)).
-                forEach(System.out::println);
+        return list.stream().
+        filter(s -> s.getName().startsWith(name)).
+        collect(Collectors.toList());
 
     }
 
     @Override
-    public void searchByContact(String contact) {
+    public List<Contact> searchByContact(String contact) {
         System.out.println("=====Result from memory=====");
-        list.stream().
+        return list.stream().
                 filter(s -> s.getContact().contains(contact)).
-                forEach(System.out::println);
+                collect(Collectors.toList());
     }
 
 

@@ -16,7 +16,7 @@ public class SearchByContactMenuAction implements MenuAction {
             System.out.println("Please, enter part of contact");
             String contact=validNumber();
             for (int i = 0; i <cs.length ; i++) {
-                cs[i].searchByContact(contact);
+                System.out.println(cs[i].searchByContact(contact));
             }
             if (!closeAfter()) {
                 break;

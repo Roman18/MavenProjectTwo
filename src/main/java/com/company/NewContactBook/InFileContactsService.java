@@ -23,26 +23,29 @@ public class InFileContactsService implements ContactService {
     }
 
     @Override
-    public List getAll() {
+    public List<Contact> getAll() {
         System.out.println("=====Result from file=====");
-        List<String> list = new ArrayList<>();
+        List<Contact> listOfContacts = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(file)) {
             BufferedInputStream bis = new BufferedInputStream(fis);
             scanner = new Scanner(bis);
             while (scanner.hasNextLine()) {
-                list.add(scanner.nextLine());
+                String[] answer = scanner.nextLine().split("\\[|:");
+                listOfContacts.add(new Contact(answer[0],
+                        answer[2].substring(0, answer[2].length() - 1),
+                        answer[1].equals("email") ? EnumContacts.email : EnumContacts.phone));
             }
         } catch (IOException e) {
             System.out.println("Problem with file");
         }
-        return list;
+        return listOfContacts;
     }
 
     @Override
     public void remove(String name) {
         PrintWriter pw = null;
         File newFile = new File("D:\\ContactBookProject\\src\\main\\resources\\addressesReplace.txt");
-        BufferedInputStream bis = null;
+        BufferedInputStream bis;
         try (FileInputStream fis = new FileInputStream(file)) {
             bis = new BufferedInputStream(fis);
             pw = new PrintWriter(new FileOutputStream(newFile));
@@ -53,7 +56,6 @@ public class InFileContactsService implements ContactService {
                     pw.write(result + "\n");
                 }
             }
-
         } catch (IOException e) {
             System.out.println("Problem with file");
         } finally {
@@ -85,7 +87,6 @@ public class InFileContactsService implements ContactService {
     public void add(Contact c) {
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(file, true))) {
             pw.write(c.toString() + "\n");
-
             pw.flush();
         } catch (IOException e) {
             System.out.println("Problem with file");
@@ -93,27 +94,34 @@ public class InFileContactsService implements ContactService {
     }
 
     @Override
-    public void searchByName(String name) {
+    public List<Contact> searchByName(String name) {
+
         System.out.println("=====Result from file=====");
         String result;
+        List<Contact> listOfContacts = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(file)) {
             BufferedInputStream bis = new BufferedInputStream(fis);
             scanner = new Scanner(bis);
             while (scanner.hasNextLine()) {
                 result = scanner.nextLine();
                 if (result.startsWith(name)) {
-                    System.out.println(result);
+                    String[] answer = result.split("\\[|:");
+                    listOfContacts.add(new Contact(answer[0],
+                            answer[2].substring(0, answer[2].length() - 1),
+                            answer[1].equals("email") ? EnumContacts.email : EnumContacts.phone));
                 }
             }
         } catch (IOException e) {
             System.out.println("Problem with file");
         }
+        return listOfContacts;
     }
 
     @Override
-    public void searchByContact(String contact) {
+    public List<Contact> searchByContact(String contact) {
         System.out.println("=====Result from file=====");
         String result;
+        List<Contact> listOfContacts = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(file)) {
             BufferedInputStream bis = new BufferedInputStream(fis);
             scanner = new Scanner(bis);
@@ -121,12 +129,17 @@ public class InFileContactsService implements ContactService {
                 result = scanner.nextLine();
                 String checked = processing(result);
                 if (checked.contains(contact)) {
-                    System.out.println(result);
+                    String[] answer = result.split("\\[|:");
+                    listOfContacts.add(new Contact(answer[0],
+                            answer[2].substring(0, answer[2].length() - 1),
+                            answer[1].equals("email") ? EnumContacts.email : EnumContacts.phone));
                 }
             }
         } catch (IOException e) {
             System.out.println("Problem with file");
         }
+
+        return listOfContacts;
     }
 
     private String processing(String word) {

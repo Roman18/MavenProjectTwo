@@ -18,8 +18,7 @@ public class SearchByNameMenuAction implements MenuAction {
             System.out.println("Please, enter name");
             String name=scanner.nextLine();
             for (int i = 0; i <cs.length ; i++) {
-
-                cs[i].searchByName(name);
+                System.out.println(cs[i].searchByName(name));
             }
             if (!closeAfter()) {
                 break;
