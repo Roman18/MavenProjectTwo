@@ -1,5 +1,12 @@
 package com.company.NewContactBook;
 
+import com.company.NewContactBook.Menu.*;
+import com.company.NewContactBook.Menu.Actions.*;
+import com.company.NewContactBook.Services.ContactService;
+import com.company.NewContactBook.Services.ContactsNioService;
+import com.company.NewContactBook.Services.InFileContactsService;
+import com.company.NewContactBook.Services.InMemoryContactsService;
+
 import java.util.Scanner;
 
 public class Main {

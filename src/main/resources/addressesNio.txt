@@ -1,3 +1,3 @@
-German[email:german@gmail.com]
-Sasha[phone:+380987566412]
-Pasha[email:pasha@ukr.net]
+Igor[email:igor@mail.ru]
+Sasha[email:sasha@ukr.net]
+Dasha[email:dasha@gmail.com]
